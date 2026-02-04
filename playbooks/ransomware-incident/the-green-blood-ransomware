@@ -1,0 +1,25 @@
+# The Green Blood Ransomware
+
+## Overview
+**The Green Blood** is a ransomware family identified by the file extension `.gblood` and multiple ransom note variants. The malware encrypts victim files and drops instructions demanding payment for decryption.
+
+---
+## Ransomware Identifiers
+### File Extension
+```
+.gblood
+```
+### Ransom Notes Observed
+```
+RESTORE_FILES.txt
+README.txt
+DECRYPT_INSTRUCTIONS.txt
+IMPORTANT_README.txt
+HOW_TO_RECOVER_FILES.txt
+```
+---
+## Known Samples
+### Sample Hashes (SHA-256)
+```
+05294c9970f365c92e0b0f1250db678dc356dbf418dba27bdd5eeb68487a7199
+```
