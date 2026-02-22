@@ -1,0 +1,25 @@
+name: 🔗 Check Markdown Links
+
+on:
+  push:
+    branches: [ main, master ]
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 8am UTC — catches stale links weekly
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    name: Validate Internal Links
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'no'
+          use-verbose-mode: 'yes'
+          config-file: '.github/mlc-config.json'
+          folder-path: '.'
+          file-extension: '.md'
