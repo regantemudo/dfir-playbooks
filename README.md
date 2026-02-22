@@ -214,26 +214,11 @@ file.write_count > 500 WITHIN 60s AND process.name NOT IN (backup_tools_whitelis
 
 ---
 
-## ⚙️ GitHub Actions (CI/CD for Threat Intel)
+## 🌍 Live Threat Map
 
-This repo uses automated workflows to keep research accurate, safe, and up to date.
+> Visualizing active campaigns, C2 infrastructure, and attacker geography documented in this repo.
 
-| Workflow | Trigger | What It Does |
-|---|---|---|
-| [🔍 Validate IOCs](./.github/workflows/validate-iocs.yml) | Every push / PR | Scans all markdown files for undefanged IPs/domains; blocks merge if live IOCs are found. Also checks all PHP samples are renamed `.php.sample` |
-| [🔗 Check Links](./.github/workflows/link-check.yml) | Every push + weekly Monday | Validates all internal links across every `.md` file aren't broken |
-| [🗺️ MITRE Coverage](./.github/workflows/mitre-coverage.yml) | Every push to playbooks | Extracts all `T####` technique IDs from the repo and generates a coverage report artifact |
-| [📅 Stale Content](./.github/workflows/stale-content.yml) | 1st of every month | Flags any playbook or intel folder not updated in 90+ days so TTPs stay current |
-
-### Why This Matters
-
-In a real SOC or threat intel program, stale playbooks and un-defanged IOCs are operational risks.  
-These workflows enforce the same discipline you'd apply in a production security environment:
-
-- **IOC validation** = no analyst accidentally clicks a live malicious link from the README
-- **Link checking** = internal cross-references stay valid as content grows
-- **MITRE coverage report** = instant audit trail of technique documentation
-- **Freshness checks** = threat TTPs evolve; playbooks need to reflect current attacker behaviour
+![Live Threat Map](https://raw.githubusercontent.com/regantemudo/dfir-playbooks/main/threat-map.svg)
 
 ## Design Principles
 
@@ -241,12 +226,6 @@ These workflows enforce the same discipline you'd apply in a production security
 - Defender-first — detection queries and response steps are the priority
 - MITRE ATT&CK mapped across all playbooks
 - SOC-ready structure for Tier 1–3 analysts
-
----
-
-## Framework Alignment
-
-NIST SP 800-61 · SANS PICERL · MITRE ATT&CK v14 · OWASP
 
 ---
 
