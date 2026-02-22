@@ -1,0 +1,122 @@
+# Black Shrantac Ransomware — Threat Intelligence & Victim Analysis (2025–2026)
+
+## Overview
+
+This repository documents **open-source threat intelligence (OSINT)** related to the **Black Shrantac ransomware group**, an emerging double-extortion actor active from **September 2025 through January 2026**.
+
+The research focuses on:
+- Leak site infrastructure
+- Victimology and timeline analysis
+- Sector and geographic targeting patterns
+- Defensive insights for SOC and IR teams
+
+This project is intended for **defenders, researchers, and threat intelligence analysts**.
+
+---
+
+## Threat Actor Summary
+
+- **Name:** Black Shrantac  
+- **Type:** Ransomware (Double Extortion)  
+- **Operational Period:** 2025–2026  
+- **Motivation:** Financial  
+- **Leak Site:** Tor-based data leak portal  
+- **Target Profile:** Mid-market enterprises, public sector, regulated industries  
+
+Black Shrantac publishes victim names, dates, and claimed data volumes to pressure organizations into ransom negotiations.
+
+---
+
+## Leak Site Intelligence
+
+Observed leak site features:
+- Public victim listing (“Leaks” section)
+- Negotiation contact page
+- Authentication panel (victim login)
+- Consistent branding (logo, favicon)
+
+The structure indicates a **stable and organized operation**, not opportunistic activity.
+
+---
+
+## Victim Dataset
+
+As of **January 2026**, Black Shrantac has publicly listed **30+ organizations** across multiple regions and industries.
+
+### Industries Impacted
+- Government & Public Administration  
+- Utilities & Water Authorities  
+- Manufacturing & Industrial Engineering  
+- Financial Services & Tax Firms  
+- Legal Services  
+- Healthcare  
+
+### Geographic Distribution
+- India  
+- United States  
+- Australia  
+- Southeast Asia  
+- Middle East  
+- Latin America  
+
+> **Note:** Victim names are sourced exclusively from the group’s public leak site and are treated as **unverified claims**.
+
+---
+
+## Timeline Highlights
+
+- **Sep–Oct 2025:** Initial operational activity  
+- **Oct–Dec 2025:** Peak victim disclosures  
+- **Jan 2026:** Largest claimed data exposure (135 GB)  
+
+The activity curve suggests **rapid maturation** rather than a slow burn campaign.
+
+---
+
+## Key Observations
+
+- Data exfiltration is central to the extortion strategy  
+- Large datasets (>80 GB) used as leverage  
+- No ideological or political messaging  
+- Focus on organizations with regulatory exposure  
+- Consistent posting cadence indicates operational discipline  
+
+---
+
+## Why This Matters
+
+Black Shrantac represents a **mid-tier ransomware actor with upward momentum**.  
+While not technically novel, its effectiveness lies in:
+- Target selection  
+- Reputation-based pressure  
+- Predictable, repeatable extortion workflows  
+
+For defenders, this reinforces the need to assume **data theft precedes encryption**.
+
+---
+
+## Defensive Takeaways
+
+- Monitor dark web leak sites proactively  
+- Enforce MFA on all external access paths  
+- Restrict privileged accounts and legacy authentication  
+- Maintain offline, immutable backups  
+- Prepare legal and communications playbooks in advance  
+
+Ransomware is no longer just an IT problem — it is a **business risk issue**.
+
+---
+
+## Disclaimer
+This repository is for **educational and defensive purposes only**.
+
+- All victim references are based on **claims made by Black Shrantac** on a publicly accessible Tor leak site  
+- Claims have **not been independently verified**  
+- Inclusion does **not imply fault, negligence, or confirmed compromise**  
+- No stolen data is hosted or shared  
+
+---
+
+## License
+This research is shared for **non-malicious, educational use only**.  
+Any misuse for illegal or unethical activity is strictly prohibited.
