@@ -1,9 +1,8 @@
 name: Generate Live Threat Map
 
 on:
-  # Runs automatically every 6 hours (UTC)
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 1 * * *"
   # Allows manual trigger
   workflow_dispatch:
 
