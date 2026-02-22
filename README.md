@@ -8,10 +8,10 @@
 ![Samples](https://img.shields.io/badge/Malware%20Samples-12%20Defanged-green?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active%20Research-brightgreen?style=flat-square)
 
-[![🔍 Validate IOCs](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/validate-iocs.yml/badge.svg)](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/validate-iocs.yml)
-[![🔗 Check Links](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/link-check.yml/badge.svg)](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/link-check.yml)
-[![🗺️ MITRE Coverage](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/mitre-coverage.yml/badge.svg)](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/mitre-coverage.yml)
-[![📅 Stale Check](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/stale-content.yml/badge.svg)](https://github.com/regantemudo/dfir-threat-intel-research/actions/workflows/stale-content.yml)
+[![🔍 Validate IOCs](https://github.com/regantemudo/dfir-playbooks/actions/workflows/validate-iocs.yml/badge.svg)](https://github.com/regantemudo/dfir-playbooks/actions/workflows/validate-iocs.yml)
+[![🔗 Check Links](https://github.com/regantemudo/dfir-playbooks/actions/workflows/link-check.yml/badge.svg)](https://github.com/regantemudo/dfir-playbooks/actions/workflows/link-check.yml)
+[![🗺️ MITRE Coverage](https://github.com/regantemudo/dfir-playbooks/actions/workflows/mitre-coverage.yml/badge.svg)](https://github.com/regantemudo/dfir-playbooks/actions/workflows/mitre-coverage.yml)
+[![📅 Stale Check](https://github.com/regantemudo/dfir-playbooks/actions/workflows/stale-content.yml/badge.svg)](https://github.com/regantemudo/dfir-playbooks/actions/workflows/stale-content.yml)
 
 Practical Digital Forensics, Incident Response (DFIR), and Threat Intelligence research — built around **real-world campaigns observed in the wild.**
 
