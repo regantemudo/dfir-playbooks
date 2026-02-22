@@ -1,0 +1,66 @@
+name: 🗺️ MITRE ATT&CK Coverage Report
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'playbooks/**'
+      - 'threat-infrastructure/**'
+      - 'incident-notes/**'
+  workflow_dispatch:  # Allow manual trigger from GitHub UI
+
+jobs:
+  mitre-coverage:
+    runs-on: ubuntu-latest
+    name: Extract & Report ATT&CK Techniques
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Extract MITRE technique coverage
+        run: |
+          python3 - <<'PYEOF'
+          import os, re
+
+          technique_pattern = re.compile(r'\bT\d{4}(?:\.\d{3})?\b')
+          coverage = {}
+
+          for root, dirs, files in os.walk('.'):
+              dirs[:] = [d for d in dirs if d not in ['.git']]
+              for fname in files:
+                  if fname.endswith(('.md', '')) and not fname.startswith('.'):
+                      fpath = os.path.join(root, fname)
+                      try:
+                          with open(fpath, 'r', errors='ignore') as f:
+                              content = f.read()
+                          techs = technique_pattern.findall(content)
+                          for t in set(techs):
+                              if t not in coverage:
+                                  coverage[t] = []
+                              coverage[t].append(fpath.replace('./', ''))
+                      except:
+                          pass
+
+          print(f"\n{'='*60}")
+          print(f"  MITRE ATT&CK TECHNIQUE COVERAGE REPORT")
+          print(f"  Total unique techniques documented: {len(coverage)}")
+          print(f"{'='*60}")
+          for tech in sorted(coverage.keys()):
+              files = ', '.join(sorted(set(coverage[tech])))
+              print(f"  {tech}  →  {files}")
+          print(f"{'='*60}\n")
+          PYEOF
+
+      - name: Upload coverage summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: mitre-coverage-report
+          retention-days: 30
+          path: |
+            .github/
