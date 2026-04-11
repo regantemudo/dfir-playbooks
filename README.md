@@ -1,4 +1,4 @@
-# 🛡️ Regan Temudo — DFIR & Threat Intelligence Research
+# 🛡️  DFIR & Threat Intelligence Research
 
 > **Defensive research repository.** All malware samples are defanged. See [DISCLAIMER.md](./DISCLAIMER.md) before use.
 
