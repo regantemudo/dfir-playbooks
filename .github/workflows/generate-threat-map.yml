@@ -2,7 +2,7 @@ name: Generate Live Threat Map
 
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 10 * * 4"
   # Allows manual trigger
   workflow_dispatch:
 
