@@ -30,7 +30,7 @@ This is not a theoretical collection. Every playbook, sample, and write-up here 
 | 🧬 **Analyze a malware sample** | [Sample Analysis →](./playbooks/malware-infection/README.md) | Defanged PHP shells with behavior notes |
 | 🗺️ **Map an attack to MITRE ATT&CK** | [MITRE Coverage →](#-mitre-attck-coverage) | Full technique index |
 | 🏗️ **Investigate C2 infrastructure** | [Threat Infrastructure →](./threat-infrastructure/) | C2 patterns, RMM abuse, DNS tunneling |
-| 📖 **Read a threat actor profile** | [Ransomware Intel →](./playbooks/ransomware-incident/) | Black Shrantac, Green Blood |
+| 📖 **Read a threat actor profile** | [Ransomware Intel →](./playbooks/ransomware-incident/) | Gunra (AA26-222A), Black Shrantac, Green Blood |
 | 🛡️ **Build detection rules** | [Detection Queries →](#-detection-quick-reference) | SIEM/EDR queries ready to deploy |
 
 ---
@@ -89,6 +89,7 @@ Real-world threat investigations written in analyst format.
 
 ### 📊 Ransomware Intelligence
 
+- **[Gunra Ransomware](./playbooks/ransomware-incident/gunra-ransomware-aa26-222a.md)** — Conti-derived double-extortion RaaS ("Golden Community"), subject of joint advisory **CISA AA26-222A** (Aug 2026). Enters via unpatched FortiGate / SSL-VPN (CVE-2024-55591, CVE-2025-24472). Extension `.ENCRT`, ransom note `R3ADM3.txt`.
 - **[Black Shrantac](./playbooks/ransomware-incident/)** — Double-extortion actor active Sep 2025–Jan 2026. 30+ victims across government, healthcare, utilities, financial services.
 - **[Green Blood Ransomware](./playbooks/ransomware-incident/)** — Extension `.gblood`, known SHA-256 hashes, ransom note variants.
 
@@ -102,6 +103,8 @@ Real-world threat investigations written in analyst format.
 ```
 91.84.125[.]16        # Fake CAPTCHA PowerShell C2 — payload host (/big.txt)
 5.9.228[.]188:5000    # Shadow C2 admin panel
+23.239.119[.]2        # Gunra ransomware server pool (AA26-222A)
+103.125.234[.]14      # Gunra command node (AA26-222A)
 ```
 
 ### Malicious Domains
@@ -114,11 +117,14 @@ stepmomhub[.]com      # cache.php WordPress mass-compromise receiver
 ```
 365f2f4de5ac872ce5a1fe6fbbf382b936c1defc6d767a37f69b5df4188d9522   # shadow-bot PHP shell
 05294c9970f365c92e0b0f1250db678dc356dbf418dba27bdd5eeb68487a7199   # Green Blood ransomware sample
+91f8fc7a3290611e28a35a403fd815554d9d856006cc2ee91ccdb64057ae53b0   # Gunra ransomware encryptor (cryptor.exe)
+2dc70a12d158d437e45a55b1d52f3d61c6082a1e1667573302ba3b62813e2751   # Gunra exfil tool (main.exe)
 ```
 
 ### Ransomware File Extensions
 ```
 .gblood    # Green Blood Ransomware
+.ENCRT     # Gunra Ransomware (also .CRYPT, and .GNRA on Linux)
 ```
 
 ### Ransomware Note Filenames
@@ -128,6 +134,7 @@ README.txt
 DECRYPT_INSTRUCTIONS.txt
 IMPORTANT_README.txt
 HOW_TO_RECOVER_FILES.txt
+R3ADM3.txt              # Gunra Ransomware
 ```
 
 ---
@@ -178,8 +185,8 @@ AND dns.query.domain NOT IN (whitelist)
 ### Ransomware Indicators
 ```
 # File extension monitoring
-file.extension IN (".gblood") OR
-file.name IN ("RESTORE_FILES.txt","DECRYPT_INSTRUCTIONS.txt","HOW_TO_RECOVER_FILES.txt")
+file.extension IN (".gblood",".ENCRT",".CRYPT",".GNRA") OR
+file.name IN ("RESTORE_FILES.txt","DECRYPT_INSTRUCTIONS.txt","HOW_TO_RECOVER_FILES.txt","R3ADM3.txt")
 
 # Mass file modification (ransomware encryption behavior)
 file.write_count > 500 WITHIN 60s AND process.name NOT IN (backup_tools_whitelist)
@@ -192,6 +199,7 @@ file.write_count > 500 WITHIN 60s AND process.name NOT IN (backup_tools_whitelis
 | Tactic | Technique | ID | Covered In |
 |---|---|---|---|
 | Initial Access | Phishing | T1566 | Phishing Playbook, Fake CAPTCHA |
+| Initial Access | Exploit Public-Facing Application | T1190 | Gunra Ransomware |
 | Execution | PowerShell | T1059.001 | Fake CAPTCHA Playbook |
 | Execution | User Execution | T1204 | RMM Abuse, Phishing |
 | Persistence | Web Shell | T1505.003 | All PHP samples |
@@ -204,8 +212,9 @@ file.write_count > 500 WITHIN 60s AND process.name NOT IN (backup_tools_whitelis
 | Lateral Movement | Remote Services | T1021 | Ransomware Playbook |
 | Exfiltration | Exfil Over C2 Channel | T1041 | Ransomware, Insider Threat |
 | Exfiltration | DNS Tunneling | T1048.003 | DNS Tunneling write-up |
-| Impact | Data Encrypted for Impact | T1486 | Ransomware Playbooks |
-| Impact | Inhibit System Recovery | T1490 | Black Shrantac, Green Blood |
+| Impact | Data Encrypted for Impact | T1486 | Ransomware Playbooks, Gunra |
+| Impact | Inhibit System Recovery | T1490 | Black Shrantac, Green Blood, Gunra |
+| Credential Access | OS Credential Dumping: NTDS | T1003.003 | Gunra Ransomware |
 | Command & Control | Web Protocols | T1071.001 | Fake CAPTCHA C2 |
 | Command & Control | Application Layer Protocol: DNS | T1071.004 | DNS Tunneling write-up |
 | Command & Control | Remote Access Software | T1219 | RMM Abuse |
